@@ -1,6 +1,7 @@
 package models;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,6 +21,17 @@ public class UserTest {
     public void User_instantiatesCorrectly(){
         User user = setupUser();
         assertTrue(user instanceof  User);
+    }
+
+    @Test
+    public void User_getsNameCorrectly() {
+        User user = setupUser();
+        assertEquals("James",user.getName());
+    }
+    @Test
+    public void User_getsPositionCorrectly() {
+        User user = setupUser();
+        assertEquals("HR",user.getPosition());
     }
 
     private User setupUser(){
