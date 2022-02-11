@@ -27,6 +27,11 @@ public class DepartmentsTest {
         Departments departments = setupDepartments();
         assertEquals("Sales", departments.getName());
     }
+    @Test
+    public void Departments_GetsDescription() {
+        Departments departments = setupDepartments();
+        assertEquals("Carryout marketing", departments.getDescription());
+    }
 
     private Departments setupDepartments (){
         return new Departments("Sales","Carryout marketing");
