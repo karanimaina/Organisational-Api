@@ -2,6 +2,7 @@ package models;
 
 public class User {
     String name;
+    String position;
 
     public User(String name , String position, String role) {
 
@@ -9,5 +10,9 @@ public class User {
 
     public String getName() {
         return  name;
+    }
+
+    public String getPosition() {
+        return position;
     }
 }
