@@ -20,24 +20,24 @@ public class UserTest {
     @Test
     public void User_instantiatesCorrectly(){
         User user = setupUser();
-        assertTrue(user instanceof  User);
+        Assert.assertTrue(user instanceof  User);
     }
 
     @Test
     public void User_getsNameCorrectly() {
         User user = setupUser();
-        assertEquals("James",user.getName());
+        Assert.assertEquals("James",user.getName());
     }
     @Test
     public void User_getsPositionCorrectly() {
         User user = setupUser();
-        assertEquals("HR",user.getPosition());
+        Assert.assertEquals("HR",user.getPosition());
     }
 
     @Test
     public void User_getsRoleCorrectly() {
         User user = setupUser();
-        assertEquals("Manage employess", user.getRole());
+        Assert.assertEquals("Manage employess", user.getRole());
     }
 
     private User setupUser(){
