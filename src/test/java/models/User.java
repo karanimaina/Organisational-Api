@@ -1,11 +1,15 @@
 package models;
 
 public class User {
-    String name;
-    String position;
+    private  int id;
+    private String name;
+    private String position;
+    private String role;
 
-    public User(String name , String position, String role) {
-
+    public User(String name, String position, String role) {
+        this.name = name;
+        this.position = position;
+        this.role = role;
     }
 
     public String getName() {
@@ -14,5 +18,9 @@ public class User {
 
     public String getPosition() {
         return position;
+    }
+
+    public String getRole() {
+        return role;
     }
 }

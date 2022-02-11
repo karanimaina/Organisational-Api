@@ -34,6 +34,12 @@ public class UserTest {
         assertEquals("HR",user.getPosition());
     }
 
+    @Test
+    public void User_getsRoleCorrectly() {
+        User user = setupUser();
+        assertEquals("Manage employess", user.getRole());
+    }
+
     private User setupUser(){
         return new User("James","HR","Manage employess");
     }
