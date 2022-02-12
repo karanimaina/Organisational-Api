@@ -1,5 +1,6 @@
 package dao;
 
+import models.Department_News;
 import models.News;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -14,18 +15,41 @@ public class Sql2oNewsDao implements NewsDao {
 
     @Override
     public void addNews(News news) {
-        try(Connection con=sql2o.open()) {
-            String sql="INSERT INTO news (news_type,department_id,user_id,title,description) VALUES (:news_type," +
+        try (Connection con = sql2o.open()) {
+            String sql = "INSERT INTO news (news_type,department_id,user_id,title,description) VALUES (:news_type," +
                     ":department_id,:user_id,:title,:description)";
-            int id= (int) con.createQuery(sql,true)
+            int id = (int) con.createQuery(sql, true)
                     .bind(news)
                     .executeUpdate()
                     .getKey();
             news.setId(id);
 
+        } catch (Sql2oException e) {
+            System.out.println(e);
+        }
+    }
+    @Override
+    public void addDepartmentNews(Department_News department_news) {
+        try(Connection con=sql2o.open()) {
+            String sql="INSERT INTO news (news_type,department_id,user_id,title,description) VALUES (:news_type,:department_id,:user_id,:title,:description)";
+            int id= (int) con.createQuery(sql,true)
+                    .bind(department_news)
+                    .executeUpdate()
+                    .getKey();
+            department_news.setId(id);
+
         }catch (Sql2oException e){
             System.out.println(e);
         }
+    }
+
+
+
+
+
+
+
+
 
 
     }
