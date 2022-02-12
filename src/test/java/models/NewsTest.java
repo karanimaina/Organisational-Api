@@ -17,6 +17,22 @@ public class NewsTest {
         assertEquals("Position advert",news.getTitle());
     }
 
+    @Test
+    public void News_getDescription() {
+        News news = setupNews();
+        assertEquals("new intern required",news.getDescription());
+    }
+
+    @Test
+    public void News_getDepartmentId () {
+        News news = setupNews();
+        assertEquals(1, news.getDepartment_id());
+    }
+
+    @Test
+    public void News_get() {
+    }
+
     private News setupNews (){
         return new News("Position advert","new intern required",1);
     }
