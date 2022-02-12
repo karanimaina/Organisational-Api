@@ -103,8 +103,20 @@ public class Sql2oDepartmentsDao implements DepartmentsDao {
                     .addParameter("id",id)
                     .executeAndFetch(News.class);
         }
-
     }
+    @Override
+    public void clearAll() {
+        try (Connection con=sql2o.open()){
+            String sql="DELETE FROM departments";
+            String sqlUsersDepartments="DELETE FROM users_departments";
+            con.createQuery(sql).executeUpdate();
+            con.createQuery(sqlUsersDepartments).executeUpdate();
+
+        }catch (Sql2oException e){
+            System.out.println(e);
+        }
+    }
+}
 
 
 
