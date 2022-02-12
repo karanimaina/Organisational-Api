@@ -17,7 +17,7 @@ private Sql2o sql2o;
     @Override
     public void add(User user) {
         try (Connection con=sql2o.open()){
-            String sql ="INSERT INTO staff (name,position,staff_role) VALUES (:name,:position,:role) ";
+            String sql ="INSERT INTO staff (name,position,role) VALUES (:name,:position,:role) ";
             int id=(int) con.createQuery(sql,true)
                     .bind(user)
                     .executeUpdate()
@@ -68,6 +68,20 @@ private Sql2o sql2o;
                     .executeAndFetchFirst(User.class);
         }
     }
+    @Override
+    public void clearAll() {
 
-}
+        try (Connection con = sql2o.open()) {
+            String sql = "DELETE FROM staff ";
+            con.createQuery(sql).executeUpdate();
+            String sqlUsersDepartments = "DELETE FROM users_departments";
+            con.createQuery(sqlUsersDepartments).executeUpdate();
+
+
+        } catch (Sql2oException e) {
+            System.out.println(e);
+        }
+
+    }
+    }
 
