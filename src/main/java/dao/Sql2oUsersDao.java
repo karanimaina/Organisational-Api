@@ -59,6 +59,15 @@ private Sql2o sql2o;
             return departments;
         }
     }
+    @Override
+    public User findById(int id) {
+        try (Connection con=sql2o.open()){
+            String sql=("SELECT * FROM staff WHERE id=:id");
+            return con.createQuery(sql)
+                    .addParameter("id",id)
+                    .executeAndFetchFirst(User.class);
+        }
+    }
 
 }
 
