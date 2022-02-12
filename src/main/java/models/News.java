@@ -28,6 +28,10 @@ public class News {
         this.news_type="department";
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -64,4 +68,6 @@ public class News {
     public int hashCode() {
         return Objects.hash(title, news_type, description, department_id, id, user_id, TYPE_OF_NEWS);
     }
+
+
 }
