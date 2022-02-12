@@ -11,6 +11,12 @@ public class NewsTest {
     assertTrue(news instanceof News);
     }
 
+    @Test
+    public void  News_getTitle() {
+        News news = setupNews();
+        assertEquals("Position advert",news.getTitle());
+    }
+
     private News setupNews (){
         return new News("Position advert","new intern required",1);
     }
