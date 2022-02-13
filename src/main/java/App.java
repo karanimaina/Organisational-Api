@@ -3,6 +3,8 @@ import dao.Sql2oDepartmentsDao;
 import dao.Sql2oNewsDao;
 import dao.Sql2oUsersDao;
 import exceeptions.ApiExceptions;
+import models.Departments;
+import models.User;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import static spark.Spark.*;
@@ -113,5 +115,28 @@ public class App {
                 return gson.toJson(sql2oDepartmentsDao.findById(id));
             }
         });
+        get("/news/department/:id","application/json",(request, response) -> {
+
+            int id=Integer.parseInt(request.params("id"));
+            Departments departments=sql2oDepartmentsDao.findById(id);
+            if(departments==null){
+                throw new ApiExceptions.ApiException(404, String.format("No department with the id: \"%s\" exists",
+                        request.params("id")));
+            }
+            if(sql2oDepartmentsDao.getDepartmentNews(id).size()>0){
+                return gson.toJson(sql2oDepartmentsDao.getDepartmentNews(id));
+            }
+            else {
+                return "{\"message\":\"I'm sorry, but no news in this department.\"}";
+            }
+        });
+        //create users
+        post("/users/new","application/json",(request, response) -> {
+            User user=gson.fromJson(request.body(),User.class);
+            sql2oUsersDao.add(user);
+            response.status(201);
+            return gson.toJson(user);
+        });
+
 
 
