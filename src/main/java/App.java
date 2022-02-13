@@ -144,5 +144,12 @@ public class App {
             response.status(201);
             return gson.toJson(departments);
         });
+'
+        post("/news/new/general","application/json",(request, response) -> {
 
+            News news =gson.fromJson(request.body(),News.class);
+            sql2oNewsDao.addNews(news);
+            response.status(201);
+            return gson.toJson(news);
+        });'
 
