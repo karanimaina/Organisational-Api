@@ -2,6 +2,7 @@ import com.google.gson.Gson;
 import dao.Sql2oDepartmentsDao;
 import dao.Sql2oNewsDao;
 import dao.Sql2oUsersDao;
+import exceeptions.ApiExceptions;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import static spark.Spark.*;
@@ -81,6 +82,16 @@ public class App {
             }
             else {
                 return "{\"message\":\"I'm sorry, but user is in no department.\"}";
+            }
+        });
+        get("/user/:id", "application/json", (request, response) -> {
+            int id=Integer.parseInt(request.params("id"));
+            if(sql2oUsersDao.findById(id)==null){
+                throw new ApiExceptions.ApiException(404, String.format("No user with the id: \"%s\" exists",
+                        request.params("id")));
+            }
+            else {
+                return gson.toJson(sql2oUsersDao.findById(id));
             }
         });
 

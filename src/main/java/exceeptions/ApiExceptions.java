@@ -1,7 +1,7 @@
 package exceeptions;
 
 public class ApiExceptions {
-    public class ApiException extends RuntimeException {
+    public static class ApiException extends RuntimeException {
         private final int statusCode;
 
         public ApiException (int statusCode, String msg){
