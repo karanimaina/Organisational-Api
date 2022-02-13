@@ -48,5 +48,40 @@ public class App {
                 return "{\"message\":\"I'm sorry, but no users are currently listed in the database.\"}";
             }
         });
+        get("/users", "application/json", (request, response) -> {
+
+            if(sql2oDepartmentsDao.getAll().size() > 0){
+                return gson.toJson(sql2oUsersDao.getAll());
+            }
+            else {
+                return "{\"message\":\"I'm sorry, but no users are currently listed in the database.\"}";
+            }
+        });
+
+        get("/departments","application/json",(request, response) -> {
+            if(sql2oDepartmentsDao.getAll().size()>0){
+                return gson.toJson(sql2oDepartmentsDao.getAll());
+            }
+            else {
+                return "{\"message\":\"I'm sorry, but no departments are currently listed in the database.\"}";
+            }
+        });
+        get("/news/general","application/json",(request, response) -> {
+            if(sql2oNewsDao.getAll().size()>0){
+                return gson.toJson(sql2oNewsDao.getAll());
+            }
+            else {
+                return "{\"message\":\"I'm sorry, but no news are currently listed in the database.\"}";
+            }
+        });
+        get("/user/:id/departments","application/json",(request, response) -> {
+            int id=Integer.parseInt(request.params("id"));
+            if(sql2oUsersDao.getAllUserDepartments(id).size()>0){
+                return gson.toJson(sql2oUsersDao.getAllUserDepartments(id));
+            }
+            else {
+                return "{\"message\":\"I'm sorry, but user is in no department.\"}";
+            }
+        });
 
 
