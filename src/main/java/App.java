@@ -4,6 +4,7 @@ import dao.Sql2oNewsDao;
 import dao.Sql2oUsersDao;
 import exceeptions.ApiExceptions;
 import models.Departments;
+import models.News;
 import models.User;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -144,12 +145,29 @@ public class App {
             response.status(201);
             return gson.toJson(departments);
         });
-'
+
         post("/news/new/general","application/json",(request, response) -> {
 
             News news =gson.fromJson(request.body(),News.class);
             sql2oNewsDao.addNews(news);
             response.status(201);
             return gson.toJson(news);
-        });'
+        });
+        post("/news/new/department","application/json",(request, response) -> {
+            News department_news =gson.fromJson(request.body(),News.class);
+            Departments departments=sql2oDepartmentsDao.findById(department_news.getDepartment_id());
+            User users=sql2oUsersDao.findById(department_news.getUser_id());
+            if(departments==null){
+                throw new ApiExceptions.ApiException(404, String.format("No department with the id: \"%s\" exists",
+                        request.params("id")));
+            }
+            if(users==null){
+                throw new ApiExceptions.ApiException(404, String.format("No user with the id: \"%s\" exists",
+                        request.params("id")));
+            }
+            sql2oNewsDao.addNews(department_news);
+            response.status(201);
+            return gson.toJson(department_news);
+        });
+
 
