@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'org.organisationapi'
+group 'com.organisationapi'
 version '1.0-SNAPSHOT'
 
 repositories {
