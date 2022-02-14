@@ -9,7 +9,7 @@ public interface UsersDao {
 
     //create
 
-    void  add(User user);
+    void  save(User user);
 
     //read
 

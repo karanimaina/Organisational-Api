@@ -22,13 +22,9 @@ public class Sql2oDepartmentsDaoTest {
 
     @Before
     public void setUp() throws Exception {
-        //uncomment the two lines below to run locally and change to your  credentials
-        //String connectionString = "jdbc:postgresql://localhost:5432/organisational_news_portal_test";
-        //Sql2o sql2o = new Sql2o(connectionString, "wangui", "33234159");
+        String connectionString = "jdbc:postgresql://localhost:5432/organisational_news_portal";
+        Sql2o sql2o = new Sql2o(connectionString, "karani-dev", "felixmaina");
 
-        //comment the two lines below to run locally
-        String connectionString = "jdbc:postgresql://ec2-18-215-99-63.compute-1.amazonaws.com:5432/da93g9c21mukon";
-        Sql2o sql2o = new Sql2o(connectionString, "fvvikmppgjhovk", "c5fc3da5048cda471e429f687669b2eec7bca3c7c07d83df5681f43d9f5bfc28");
         sql2oDepartmentsDao=new Sql2oDepartmentsDao(sql2o);
         sql2oUsersDao=new Sql2oUsersDao(sql2o);
         sql2oNewsDao=new Sql2oNewsDao(sql2o);
@@ -54,7 +50,7 @@ public class Sql2oDepartmentsDaoTest {
     public void idSetForAddedDepartment() {
         Departments department=setUpNewDepartment();
         int originalId=department.getId();
-        sql2oDepartmentsDao.add(department);
+        sql2oDepartmentsDao.save(department);
         assertNotEquals(originalId,department.getId());
     }
 
@@ -63,11 +59,11 @@ public class Sql2oDepartmentsDaoTest {
     @Test
     public void addUserToDepartment() {
         Departments department=setUpNewDepartment();
-        sql2oDepartmentsDao.add(department);
+        sql2oDepartmentsDao.save(department);
         User user=setUpNewUser();
-        User otherUser= new User("Wangui","intern","Paper work");
-        sql2oUsersDao.add(user);
-        sql2oUsersDao.add(otherUser);
+        User otherUser= new User("James","intern","junior developer");
+        sql2oUsersDao.save(user);
+        sql2oUsersDao.save(otherUser);
         sql2oDepartmentsDao.addUserToDepartment(user,department);
         sql2oDepartmentsDao.addUserToDepartment(otherUser,department);
         assertEquals(2,sql2oDepartmentsDao.getAllUsersInDepartment(department.getId()).size());
@@ -78,8 +74,8 @@ public class Sql2oDepartmentsDaoTest {
     public void getAll() {
         Departments department=setUpNewDepartment();
         Departments otherDepartment=new Departments("printing","printing of books");
-        sql2oDepartmentsDao.add(department);
-        sql2oDepartmentsDao.add(otherDepartment);
+        sql2oDepartmentsDao.save(department);
+        sql2oDepartmentsDao.save(otherDepartment);
         assertEquals(department,sql2oDepartmentsDao.getAll().get(0));
         assertEquals(otherDepartment,sql2oDepartmentsDao.getAll().get(1));
     }
@@ -88,8 +84,8 @@ public class Sql2oDepartmentsDaoTest {
     public void correctDepartmentIsReturnedFindById() {
         Departments department=setUpNewDepartment();
         Departments otherDepartment=new Departments("printing","printing of books");
-        sql2oDepartmentsDao.add(department);
-        sql2oDepartmentsDao.add(otherDepartment);
+        sql2oDepartmentsDao.save(department);
+        sql2oDepartmentsDao.save(otherDepartment);
         assertEquals(department,sql2oDepartmentsDao.findById(department.getId()));
         assertEquals(otherDepartment,sql2oDepartmentsDao.findById(otherDepartment.getId()));
 
@@ -98,11 +94,11 @@ public class Sql2oDepartmentsDaoTest {
     @Test
     public void getAllUsersInDepartment() {
         Departments department=setUpNewDepartment();
-        sql2oDepartmentsDao.add(department);
+        sql2oDepartmentsDao.save(department);
         User user=setUpNewUser();
-        User otherUser= new User("Wangui","intern","Paper work");
-        sql2oUsersDao.add(user);
-        sql2oUsersDao.add(otherUser);
+        User otherUser= new User("Mwayrs","intern","Secretary");
+        sql2oUsersDao.save(user);
+        sql2oUsersDao.save(otherUser);
         sql2oDepartmentsDao.addUserToDepartment(user,department);
         sql2oDepartmentsDao.addUserToDepartment(otherUser,department);
         assertEquals(2,sql2oDepartmentsDao.getAllUsersInDepartment(department.getId()).size());
@@ -111,9 +107,9 @@ public class Sql2oDepartmentsDaoTest {
     @Test
     public void getDepartmentNews() {
         User users=setUpNewUser();
-        sql2oUsersDao.add(users);
+        sql2oUsersDao.save(users);
         Departments departments=setUpNewDepartment();
-        sql2oDepartmentsDao.add(departments);
+        sql2oDepartmentsDao.save(departments);
         Department_News department_news =new Department_News("Meeting","To nominate new chairman",departments.getId()
                 ,users.getId());
         sql2oNewsDao.addDepartmentNews(department_news);

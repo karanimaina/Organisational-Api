@@ -23,12 +23,9 @@ public class Sql2oNewsDaoTest {
     @Before
     public void setUp() throws Exception {
         //uncomment the two lines below to run locally and change to your  credentials
-        //String connectionString = "jdbc:postgresql://localhost:5432/organisational_news_portal_test";
-        //Sql2o sql2o = new Sql2o(connectionString, "wangui", "33234159");
+        String connectionString = "jdbc:postgresql://localhost:5432/organisational_news_portal";
+        Sql2o sql2o = new Sql2o(connectionString, "karani-dev", "felixmaina");
 
-        //comment the two lines below to run locally
-        String connectionString = "jdbc:postgresql://ec2-18-215-99-63.compute-1.amazonaws.com:5432/da93g9c21mukon";
-        Sql2o sql2o = new Sql2o(connectionString, "fvvikmppgjhovk", "c5fc3da5048cda471e429f687669b2eec7bca3c7c07d83df5681f43d9f5bfc28");
         sql2oDepartmentsDao=new Sql2oDepartmentsDao(sql2o);
         sql2oUsersDao=new Sql2oUsersDao(sql2o);
         sql2oNewsDao=new Sql2oNewsDao(sql2o);
@@ -53,9 +50,9 @@ public class Sql2oNewsDaoTest {
     @Test
     public void addNews() {
         User users=setUpNewUsers();
-        sql2oUsersDao.add(users);
+        sql2oUsersDao.save(users);
         Departments departments=setUpDepartment();
-        sql2oDepartmentsDao.add(departments);
+        sql2oDepartmentsDao.save(departments);
         News news=new News("Meeting","Meeting to set activities for team building",users.getId());
         sql2oNewsDao.addNews(news);
 
@@ -69,26 +66,21 @@ public class Sql2oNewsDaoTest {
     @Test
     public void addDepartmentNews() {
         User users=setUpNewUsers();
-        sql2oUsersDao.add(users);
+        sql2oUsersDao.save(users);
         Departments departments=setUpDepartment();
-        sql2oDepartmentsDao.add(departments);
+        sql2oDepartmentsDao.save(departments);
         Department_News department_news =new Department_News("Meeting","To nominate new chairman",departments.getId()
                 ,users.getId());
         sql2oNewsDao.addDepartmentNews(department_news);
         assertEquals(users.getId(),sql2oNewsDao.findById(department_news.getId()).getUser_id());
         assertEquals(department_news.getDepartment_id(),sql2oNewsDao.findById(department_news.getId()).getDepartment_id());
-
     }
-
-
-
-
     @Test
     public void getAll() {
         User users=setUpNewUsers();
-        sql2oUsersDao.add(users);
+        sql2oUsersDao.save(users);
         Departments departments=setUpDepartment();
-        sql2oDepartmentsDao.add(departments);
+        sql2oDepartmentsDao.save(departments);
         Department_News department_news =new Department_News("Meeting","To nominate new chairman",departments.getId()
                 ,users.getId());
         sql2oNewsDao.addDepartmentNews(department_news);
@@ -97,16 +89,6 @@ public class Sql2oNewsDaoTest {
         assertEquals(2,sql2oNewsDao.getAll().size());
     }
 
-
-
-    @Test
-    public void findById() {
-    }
-
-    //helper
-//    private News setUpNewNews() {
-//        return new News("Meeting","Meeting to set activities for team building");
-//    }
     private Departments setUpDepartment() {
         return new Departments("Editing","editing of books");
     }

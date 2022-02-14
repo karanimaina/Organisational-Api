@@ -42,35 +42,10 @@ public class App {
         sql2oUsersDao=new Sql2oUsersDao(sql2o);
         conn=sql2o.open();
          //resds  users , news ,departments
-        get("/users", "application/json", (request, response) -> {
 
-            if(sql2oDepartmentsDao.getAll().size() > 0){
-                return gson.toJson(sql2oUsersDao.getAll());
-            }
-            else {
-                return "{\"message\":\"I'm sorry, but no users are currently listed in the database.\"}";
-            }
-        });
-        get("/users", "application/json", (request, response) -> {
 
-            if(sql2oDepartmentsDao.getAll().size() > 0){
-                return gson.toJson(sql2oUsersDao.getAll());
-            }
-            else {
-                return "{\"message\":\"I'm sorry, but no users are currently listed in the database.\"}";
-            }
-        });
-
-        get("/departments","application/json",(request, response) -> {
-            if(sql2oDepartmentsDao.getAll().size()>0){
-                return gson.toJson(sql2oDepartmentsDao.getAll());
-            }
-            else {
-                return "{\"message\":\"I'm sorry, but no departments are currently listed in the database.\"}";
-            }
-        });
         get("/news/general","application/json",(request, response) -> {
-            if(sql2oNewsDao.getAll().size()>0){
+            if(sql2oNewsDao.getAll().size()>0){// gets all the news
                 return gson.toJson(sql2oNewsDao.getAll());
             }
             else {
@@ -133,18 +108,34 @@ public class App {
         //create users
         post("/users/new","application/json",(request, response) -> {
             User user=gson.fromJson(request.body(),User.class);
-            sql2oUsersDao.add(user);
+            sql2oUsersDao.save(user);
             response.status(201);
             return gson.toJson(user);
+        });
+        get("/users", "application/json", (request, response) -> {
+
+            if(sql2oDepartmentsDao.getAll().size() > 0){
+                return gson.toJson(sql2oUsersDao.getAll());
+            }
+            else {
+                return "{\"message\":\"OOPs you don't have any users to view here yet \"}";
+            }
         });
 
         post("/departments/new","application/json",(request, response) -> {
             Departments departments =gson.fromJson(request.body(),Departments.class);
-            sql2oDepartmentsDao.add(departments);
+            sql2oDepartmentsDao.save(departments);
             response.status(201);
             return gson.toJson(departments);
         });
-
+        get("/departments","application/json",(request, response) -> {
+            if(sql2oDepartmentsDao.getAll().size()>0){
+                return gson.toJson(sql2oDepartmentsDao.getAll());
+            }
+            else {
+                return "{\"message\":\"OOps add depatments to the database.\"}";
+            }
+        });
         post("/news/new/general","application/json",(request, response) -> {
 
             News news =gson.fromJson(request.body(),News.class);
