@@ -34,14 +34,8 @@ public class App {
         Connection conn;
         Gson gson = new Gson();
         staticFileLocation("/public");
-        //uncomment the line below to run locally
-        //String connectionString = "jdbc:postgresql://localhost:5432/organisational_news_portal";
-        //uncomment the line below to run locally,change the following line of code to your credentials
-        //Sql2o sql2o = new Sql2o(connectionString, "wangui", "33234159");
-
-        //the two lines below are used when using heroku but if you want to run locally comment them
-        String connectionString = "jdbc:postgresql://ec2-50-17-21-170.compute-1.amazonaws.com:5432/d8b8ehu0safpui"; //!
-        Sql2o sql2o = new Sql2o(connectionString, "mihpivzxyyqmlv", "5b4f9d76874ad368465a325b3993140263c6d254771908c3d283842d54fcad11");
+        String connectionString = "jdbc:postgresql://localhost:5432/organisational_news_portal";
+        Sql2o sql2o = new Sql2o(connectionString, "karani-dev", "felixmaina");
 
         sql2oDepartmentsDao=new Sql2oDepartmentsDao(sql2o);
         sql2oNewsDao=new Sql2oNewsDao(sql2o);
@@ -80,7 +74,7 @@ public class App {
                 return gson.toJson(sql2oNewsDao.getAll());
             }
             else {
-                return "{\"message\":\"I'm sorry, but no news are currently listed in the database.\"}";
+                return "{\"message\":\"OOPs, looks like you don't have news to view yet.\"}";
             }
         });
         get("/user/:id/departments","application/json",(request, response) -> {
@@ -89,7 +83,7 @@ public class App {
                 return gson.toJson(sql2oUsersDao.getAllUserDepartments(id));
             }
             else {
-                return "{\"message\":\"I'm sorry, but user is in no department.\"}";
+                return "{\"message\":\"OOPs, enroll the user to the department.\"}";
             }
         });
         get("/user/:id", "application/json", (request, response) -> {
@@ -108,7 +102,7 @@ public class App {
                 return gson.toJson(sql2oDepartmentsDao.getAllUsersInDepartment(id));
             }
             else {
-                return "{\"message\":\"I'm sorry, but department has no users.\"}";
+                return "{\"message\":\"OOPs , add users to this department.\"}";
             }
         });
         get("/department/:id","application/json",(request, response) -> {
@@ -133,7 +127,7 @@ public class App {
                 return gson.toJson(sql2oDepartmentsDao.getDepartmentNews(id));
             }
             else {
-                return "{\"message\":\"I'm sorry, but no news in this department.\"}";
+                return "{\"message\":\"There are no news for this department.\"}";
             }
         });
         //create users
