@@ -19,44 +19,44 @@ this is a REST API thatis used for querying and retrieving Scoped news and infor
 ## API documentation
 ### user
 <ul>
-<li>Creating user https://organisational-news-portal-api.herokuapp.com/users/new
+<li>Creating user 
 {
 "name":"Ruth Mwangi"
 "position":"Manager",
 "staff_role":"Editor"
 }</li>
-<li>Viewing User https://organisational-news-portal-api.herokuapp.com/users</li>
-<li>Viewing specific User Viewing Specific User https://organisational-news-portal-api.herokuapp.com/user/:id
+<li>Viewing User </li>
+<li>Viewing specific User Viewing Specific User 
      Replace :id with id of user
-<li>Viewing Specific User Departments https://organisational-news-portal-api.herokuapp.com/users/:id/departments
+<li>Viewing Specific User Departments 
 Replace :id with id of user</li>  
 
 ### Departments
 <ul>
 <li>
-Creating Departments https://organisational-news-portal-api.herokuapp.com/departments/new
+Creating Departments 
 {
 "name":"Editing",
 "description":"Editing of books"
 }</li>
-<li>Viewing Departments https://organisational-news-portal-api.herokuapp.com/departments</li>
-<li>Viewing Specific Department https://organisational-news-portal-api.herokuapp.comdepartment/:id
+<li>Viewing Departments</li>
+<li>Viewing Specific Department 
 Replace :id with id of department</li>
-<li>Viewing Specific User in Departments https://organisational-news-portal-api.herokuapp.com/department/:id/users
+<li>Viewing Specific User in Departments
 Replace :id with id of department</li>
-<li>Adding users to department in Departments https://organisational-news-portal-api.herokuapp.com/add/user/:user_id/department/:department_id
+<li>Adding users to department in Departments
 Replace :id with id of department</li>
 </ul>
 
 ### News
 <ul>
-<li>Creating General News https://organisational-news-portal-api.herokuapp.com/news/new/general
+<li>Creating General News 
 {
 "title":"Meeting",
 "description":"Discussion about expanding",
 "user_id":1
 }</li>
-<li>Creating Department News https://organisational-news-portal-api.herokuapp.com/news/new/department
+<li>Creating Department News 
 {
 "title":"Meeting",
 "description":"Discussion about expanding",
@@ -64,8 +64,8 @@ Replace :id with id of department</li>
 "user_id":1
 }
 </li>
-<li>Viewing general news https://organisational-news-portal-api.herokuapp.com/news/general</li>
-<li>Viewing department news https://organisational-news-portal-api.herokuapp.com/news/department/:id</li>
+<li>Viewing general news </li>
+<li>Viewing department news </li>
 </ul>
  
  ## Technology
@@ -75,22 +75,49 @@ Replace :id with id of department</li>
  <li>Postman</li>
  
  ## BDD
-  <li>Click on the link :  https://organisational-news-portal-api.herokuapp.com/users/new</li>
+  <li>Click on the link :  </li>
   <li>copy the url  and place it in the postman url bar,Navigate to the post man and select post verb, </li>
   <li>on the body  rab select raw and  type json </li>
   <li>pass this data
   {
-"name":"Ruth Mwangi"
+"name":"Felix maina"
 "position":"Manager",
 "staff_role":"Editor"
 }
   </li>
 <li>click on send , you get an output similar to what you have typed with the  given Id</li>
 <li></li>
-<li>you can query by passing the Id generated ,replace the is with the number provided, https://organisational-news-portal-api.herokuapp.com/user/:id</li>
+<li>you can query by passing the Id generated ,replace the is with the number provided, /li>
 
 ## Contributions
 for any queries , contributions to the project feel free to reach out  @karani.maina2010@gmail.com
+ 
+## License
+### License
+
+MIT License
+
+Copyright (c) 2022 Felix Maina
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
   
   
   
