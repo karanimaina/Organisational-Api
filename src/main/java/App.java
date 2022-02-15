@@ -3,6 +3,7 @@ import dao.Sql2oDepartmentsDao;
 import dao.Sql2oNewsDao;
 import dao.Sql2oUsersDao;
 import exceeptions.ApiExceptions;
+
 import models.Departments;
 import models.News;
 import models.User;
@@ -34,9 +35,10 @@ public class App {
         Connection conn;
         Gson gson = new Gson();
         staticFileLocation("/public");
-        String connectionString = "jdbc:postgresql://localhost:5432/organisational_news_portal";
-        Sql2o sql2o = new Sql2o(connectionString, "karani-dev", "felixmaina");
-
+        String connectionString = "jdbc:postgresql://ec2-54-156-110-139.compute-1.amazonaws.com:5432/d464mcnh6kf0um?sslmode=require";
+        Sql2o sql2o = new Sql2o(connectionString, "pkrbnubvhomkuu", "bfbd5511eade8df8694daf863606374604c25922ee2e708462f039c94df4dd13");
+         // String connectionString = "jdbc:postgresql://localhost:5432/organisational_news_portal";
+        //  Sql2o sql2o = new Sql2o(connectionString, "karani-dev", "felixmaina");
         sql2oDepartmentsDao=new Sql2oDepartmentsDao(sql2o);
         sql2oNewsDao=new Sql2oNewsDao(sql2o);
         sql2oUsersDao=new Sql2oUsersDao(sql2o);
@@ -44,14 +46,7 @@ public class App {
          //resds  users , news ,departments
 
 
-        get("/news/general","application/json",(request, response) -> {
-            if(sql2oNewsDao.getAll().size()>0){// gets all the news
-                return gson.toJson(sql2oNewsDao.getAll());
-            }
-            else {
-                return "{\"message\":\"OOPs, looks like you don't have news to view yet.\"}";
-            }
-        });
+
         get("/user/:id/departments","application/json",(request, response) -> {
             int id=Integer.parseInt(request.params("id"));
             if(sql2oUsersDao.getAllUserDepartments(id).size()>0){
@@ -60,6 +55,15 @@ public class App {
             else {
                 return "{\"message\":\"OOPs, enroll the user to the department.\"}";
             }
+
+        });
+        //create users
+        post("/user/new","application/json",(request, response) -> {
+            User user=gson.fromJson(request.body(),User.class);
+            sql2oUsersDao.save(user);
+            response.status(201);
+          //  response.redirect("/departments/new");
+            return gson.toJson(user);
         });
         get("/user/:id", "application/json", (request, response) -> {
             int id=Integer.parseInt(request.params("id"));
@@ -71,47 +75,6 @@ public class App {
                 return gson.toJson(sql2oUsersDao.findById(id));
             }
         });
-        get("/department/:id/users","application/json",(request, response) -> {
-            int id=Integer.parseInt(request.params("id"));
-            if(sql2oDepartmentsDao.getAllUsersInDepartment(id).size()>0){
-                return gson.toJson(sql2oDepartmentsDao.getAllUsersInDepartment(id));
-            }
-            else {
-                return "{\"message\":\"OOPs , add users to this department.\"}";
-            }
-        });
-        get("/department/:id","application/json",(request, response) -> {
-            int id=Integer.parseInt(request.params("id"));
-            if(sql2oDepartmentsDao.findById(id)==null){
-                throw new ApiExceptions.ApiException(404, String.format("No department with the id: \"%s\" exists",
-                        request.params("id")));
-            }
-            else {
-                return gson.toJson(sql2oDepartmentsDao.findById(id));
-            }
-        });
-        get("/news/department/:id","application/json",(request, response) -> {
-
-            int id=Integer.parseInt(request.params("id"));
-            Departments departments=sql2oDepartmentsDao.findById(id);
-            if(departments==null){
-                throw new ApiExceptions.ApiException(404, String.format("No department with the id: \"%s\" exists",
-                        request.params("id")));
-            }
-            if(sql2oDepartmentsDao.getDepartmentNews(id).size()>0){
-                return gson.toJson(sql2oDepartmentsDao.getDepartmentNews(id));
-            }
-            else {
-                return "{\"message\":\"There are no news for this department.\"}";
-            }
-        });
-        //create users
-        post("/users/new","application/json",(request, response) -> {
-            User user=gson.fromJson(request.body(),User.class);
-            sql2oUsersDao.save(user);
-            response.status(201);
-            return gson.toJson(user);
-        });
         get("/users", "application/json", (request, response) -> {
 
             if(sql2oDepartmentsDao.getAll().size() > 0){
@@ -120,12 +83,14 @@ public class App {
             else {
                 return "{\"message\":\"OOPs you don't have any users to view here yet \"}";
             }
+
         });
 
         post("/departments/new","application/json",(request, response) -> {
             Departments departments =gson.fromJson(request.body(),Departments.class);
             sql2oDepartmentsDao.save(departments);
             response.status(201);
+           // response.redirect("/news/new/general");
             return gson.toJson(departments);
         });
         get("/departments","application/json",(request, response) -> {
@@ -133,7 +98,7 @@ public class App {
                 return gson.toJson(sql2oDepartmentsDao.getAll());
             }
             else {
-                return "{\"message\":\"OOps add depatments to the database.\"}";
+                return "{\"message\":\"OOps add departments to the database.\"}";
             }
         });
         post("/news/new/general","application/json",(request, response) -> {
@@ -141,7 +106,16 @@ public class App {
             News news =gson.fromJson(request.body(),News.class);
             sql2oNewsDao.addNews(news);
             response.status(201);
+           // response.redirect("/news/new/department");
             return gson.toJson(news);
+        });
+        get("/news/general","application/json",(request, response) -> {
+            if(sql2oNewsDao.getAll().size()>0){// gets all the news
+                return gson.toJson(sql2oNewsDao.getAll());
+            }
+            else {
+                return "{\"message\":\"OOPs, looks like you don't have news to view yet.\"}";
+            }
         });
         post("/news/new/department","application/json",(request, response) -> {
             News department_news =gson.fromJson(request.body(),News.class);
@@ -157,14 +131,60 @@ public class App {
             }
             sql2oNewsDao.addNews(department_news);
             response.status(201);
+            response.redirect("/news/new/general");
             return gson.toJson(department_news);
         });
 
+        get("/news/department/:id","application/json",(request, response) -> {
+
+            int id=Integer.parseInt(request.params("id"));
+            Departments departments=sql2oDepartmentsDao.findById(id);
+            if(departments==null){
+                throw new ApiExceptions.ApiException(404, String.format("No department with the id: \"%s\" exists",
+                        request.params("id")));
+            }
+            if(sql2oDepartmentsDao.getDepartmentNews(id).size()>0){
+                return gson.toJson(sql2oDepartmentsDao.getDepartmentNews(id));
+            }
+            else {
+                return "{\"message\":\"There are no news for this department.\"}";
+            }
+        });
+        get("/department/:id","application/json",(request, response) -> {
+            int id=Integer.parseInt(request.params("id"));
+            if(sql2oDepartmentsDao.findById(id)==null){
+                throw new ApiExceptions.ApiException(404, String.format("No department with the id: \"%s\" exists",
+                        request.params("id")));
+            }
+            else {
+                return gson.toJson(sql2oDepartmentsDao.findById(id));
+            }
+        });
+        get("/department/:id/users","application/json",(request, response) -> {
+            int id=Integer.parseInt(request.params("id"));
+            if(sql2oDepartmentsDao.getAllUsersInDepartment(id).size()>0){
+                return gson.toJson(sql2oDepartmentsDao.getAllUsersInDepartment(id));
+            }
+            else {
+                return "{\"message\":\"OOPs , add users to this department.\"}";
+            }
+        });
+        get("/user/:id/departments","application/json",(request, response) -> {
+            int id=Integer.parseInt(request.params("id"));
+            if(sql2oUsersDao.getAllUserDepartments(id).size()>0){
+                return gson.toJson(sql2oUsersDao.getAllUserDepartments(id));
+            }
+            else {
+                return "{\"message\":\"OOPs, enroll the user to the department.\"}";
+            }
+
+        });
         post("/news/new/general","application/json",(request, response) -> {
 
             News news =gson.fromJson(request.body(),News.class);
             sql2oNewsDao.addNews(news);
             response.status(201);
+            response.redirect("/add/user/:user_id/department/:department_id");
             return gson.toJson(news);
         });
         post("/add/user/:user_id/department/:department_id","application/json",(request, response) -> {
@@ -186,6 +206,7 @@ public class App {
             List<User> departmentUsers=sql2oDepartmentsDao.getAllUsersInDepartment(departments.getId());
 
             response.status(201);
+            response.redirect("/users");
             return gson.toJson(departmentUsers);
         });
         exception(ApiExceptions.ApiException.class, (exception, request, response) -> {

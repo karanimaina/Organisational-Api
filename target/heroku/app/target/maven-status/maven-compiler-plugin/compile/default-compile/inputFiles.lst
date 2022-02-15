@@ -1,0 +1,12 @@
+/home/karani-dev/IdeaProjects/Organisation-Api/src/main/java/models/News.java
+/home/karani-dev/IdeaProjects/Organisation-Api/src/main/java/dao/NewsDao.java
+/home/karani-dev/IdeaProjects/Organisation-Api/src/main/java/App.java
+/home/karani-dev/IdeaProjects/Organisation-Api/src/main/java/models/User.java
+/home/karani-dev/IdeaProjects/Organisation-Api/src/main/java/dao/Sql2oNewsDao.java
+/home/karani-dev/IdeaProjects/Organisation-Api/src/main/java/dao/Sql2oDepartmentsDao.java
+/home/karani-dev/IdeaProjects/Organisation-Api/src/main/java/models/Departments.java
+/home/karani-dev/IdeaProjects/Organisation-Api/src/main/java/dao/DepartmentsDao.java
+/home/karani-dev/IdeaProjects/Organisation-Api/src/main/java/exceeptions/ApiExceptions.java
+/home/karani-dev/IdeaProjects/Organisation-Api/src/main/java/models/Department_News.java
+/home/karani-dev/IdeaProjects/Organisation-Api/src/main/java/dao/UsersDao.java
+/home/karani-dev/IdeaProjects/Organisation-Api/src/main/java/dao/Sql2oUsersDao.java

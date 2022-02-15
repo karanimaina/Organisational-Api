@@ -22,9 +22,10 @@ public class Sql2oDepartmentsDaoTest {
 
     @Before
     public void setUp() throws Exception {
-        String connectionString = "jdbc:postgresql://localhost:5432/organisational_news_portal";
-        Sql2o sql2o = new Sql2o(connectionString, "karani-dev", "felixmaina");
-
+        //String connectionString = "jdbc:postgresql://localhost:5432/organisational_news_portal";
+       // Sql2o sql2o = new Sql2o(connectionString, "karani-dev", "felixmaina");
+        String connectionString = "jdbc:postgresql://ec2-54-156-110-139.compute-1.amazonaws.com:5432/d464mcnh6kf0um?sslmode=require";
+        Sql2o sql2o = new Sql2o(connectionString, "pkrbnubvhomkuu", "bfbd5511eade8df8694daf863606374604c25922ee2e708462f039c94df4dd13");
         sql2oDepartmentsDao=new Sql2oDepartmentsDao(sql2o);
         sql2oUsersDao=new Sql2oUsersDao(sql2o);
         sql2oNewsDao=new Sql2oNewsDao(sql2o);

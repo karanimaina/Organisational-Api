@@ -23,11 +23,7 @@ public class NewsTest {
         assertEquals("new intern required",news.getDescription());
     }
 
-    @Test
-    public void News_getDepartmentId () {
-        News news = setupNews();
-        assertEquals(1, news.getDepartment_id());
-    }
+
 
 
     private News setupNews (){

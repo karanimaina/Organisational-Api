@@ -1,0 +1,6 @@
+dao/Sql2oNewsDaoTest.class
+models/UserTest.class
+models/NewsTest.class
+dao/Sql2oUsersDaoTest.class
+models/DepartmentsTest.class
+dao/Sql2oDepartmentsDaoTest.class
