@@ -24,7 +24,7 @@ public class User {
         return position;
     }
 
-    public String getRole() {
+    public String getStaff_role() {
         return staff_role;
     }
 

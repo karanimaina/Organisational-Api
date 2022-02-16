@@ -1,5 +1,5 @@
-CREATE DATABASE organisational_news_portal;
-\c organisational_news_portal
+CREATE DATABASE organisational_api;
+\c organisational_api
 
 CREATE TABLE departments (id SERIAL PRIMARY KEY, name VARCHAR,description VARCHAR,size int);
 
@@ -9,4 +9,4 @@ CREATE TABLE staff (id SERIAL PRIMARY KEY,name VARCHAR,position VARCHAR,staff_ro
 
 CREATE TABLE users_departments (id SERIAL PRIMARY KEY,user_id INT,department_id INT);
 
-CREATE DATABASE organisational_news_portal_test WITH TEMPLATE organisational_news_portal;
+CREATE DATABASE organisational_api_test WITH TEMPLATE organisational_api;

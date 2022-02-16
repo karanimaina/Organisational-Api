@@ -40,8 +40,8 @@ public class Sql2oDepartmentsDao implements DepartmentsDao {
                     .addParameter("user_id",user.getId())
                     .addParameter("department_id",department.getId())
                     .executeUpdate();
-            String sizeQuery="SELECT user_id FROM users_departments";
-            List<Integer> size=con.createQuery(sizeQuery)
+            String userDepartments="SELECT user_id FROM users_departments";
+            List<Integer> size=con.createQuery(userDepartments)
                     .executeAndFetch(Integer.class);
             String updateDepartmentSize="UPDATE departments SET size=:size WHERE id=:id";
             con.createQuery(updateDepartmentSize).addParameter("id",department.getId())

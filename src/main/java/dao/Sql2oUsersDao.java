@@ -17,7 +17,7 @@ private Sql2o sql2o;
     @Override
     public void save(User user) {
         try (Connection con=sql2o.open()){
-            String sql ="INSERT INTO staff (name,position,staff_role) VALUES (:name,:position,:role) ";
+            String sql ="INSERT INTO staff (name,position,staff_role) VALUES (:name,:position,:staff_role) ";
             int id=(int) con.createQuery(sql,true)
                     .bind(user)
                     .executeUpdate()

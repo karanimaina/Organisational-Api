@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="dao.Sql2oNewsDaoTest" time="71.838" tests="3" errors="1" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="dao.Sql2oNewsDaoTest" time="71.142" tests="3" errors="1" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="14.0.2+12-Ubuntu-120.04"/>
@@ -39,7 +39,7 @@
     <property name="java.class.path" value="/usr/share/maven/boot/plexus-classworlds-2.x.jar"/>
     <property name="java.vm.specification.version" value="14"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher heroku:deploy"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean heroku:deploy"/>
     <property name="java.home" value="/usr/lib/jvm/java-14-openjdk-amd64"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -54,15 +54,15 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.endian" value="little"/>
   </properties>
-  <testcase name="getAll" classname="dao.Sql2oNewsDaoTest" time="24.633">
+  <testcase name="getAll" classname="dao.Sql2oNewsDaoTest" time="24.223">
     <error message="Database error: ERROR: syntax error at or near &quot;RETURNING&quot;&#10;  Position: 20" type="org.sql2o.Sql2oException">org.sql2o.Sql2oException: 
 Database error: ERROR: syntax error at or near "RETURNING"
   Position: 20
-	at dao.Sql2oNewsDaoTest.getAll(Sql2oNewsDaoTest.java:90)
+	at dao.Sql2oNewsDaoTest.getAll(Sql2oNewsDaoTest.java:86)
 Caused by: org.postgresql.util.PSQLException: 
 ERROR: syntax error at or near "RETURNING"
   Position: 20
-	at dao.Sql2oNewsDaoTest.getAll(Sql2oNewsDaoTest.java:90)
+	at dao.Sql2oNewsDaoTest.getAll(Sql2oNewsDaoTest.java:86)
 </error>
     <system-out><![CDATA[connected to database
 clearing database
@@ -72,6 +72,6 @@ SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 ]]></system-err>
   </testcase>
-  <testcase name="addNews" classname="dao.Sql2oNewsDaoTest" time="23.85"/>
-  <testcase name="addDepartmentNews" classname="dao.Sql2oNewsDaoTest" time="23.353"/>
+  <testcase name="addNews" classname="dao.Sql2oNewsDaoTest" time="23.77"/>
+  <testcase name="addDepartmentNews" classname="dao.Sql2oNewsDaoTest" time="23.145"/>
 </testsuite>
