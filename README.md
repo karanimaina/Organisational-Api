@@ -19,44 +19,44 @@ this is a REST API thatis used for querying and retrieving Scoped news and infor
 ## API documentation
 ### user
 <ul>
-<li>Creating user 
+<li>Creating user http://0.0.0.0:4567//users/new
 {
-"name":"Ruth Mwangi"
+"name":" Mwangi"
 "position":"Manager",
 "staff_role":"Editor"
 }</li>
-<li>Viewing User </li>
-<li>Viewing specific User Viewing Specific User 
+<li>Viewing User:http://0.0.0.0:4567/users </li>
+<li>Viewing specific User Viewing Specific User ::http://0.0.0.0:4567//user/:id
      Replace :id with id of user
 <li>Viewing Specific User Departments 
-Replace :id with id of user</li>  
+Replace :id with id  of user</li>  
 
 ### Departments
 <ul>
 <li>
-Creating Departments 
+## Creating Departments : http://0.0.0.0:4567/departments/new
 {
 "name":"Editing",
 "description":"Editing of books"
 }</li>
-<li>Viewing Departments</li>
-<li>Viewing Specific Department 
+<li>Viewing Departments : http://0.0.0.0:4567/departments</li>
+<li>Viewing Specific Department :http://0.0.0.0:4567/department/:id
 Replace :id with id of department</li>
-<li>Viewing Specific User in Departments
+<li>Viewing Specific User in Departments :http://0.0.0.0:4567/department/:id/users
 Replace :id with id of department</li>
-<li>Adding users to department in Departments
+<li>Adding users to department in Departments :http://0.0.0.0:4567/add/user/:id/department/:id
 Replace :id with id of department</li>
 </ul>
 
 ### News
 <ul>
-<li>Creating General News 
+<li>Creating General News :/news/new/general
 {
 "title":"Meeting",
 "description":"Discussion about expanding",
 "user_id":1
 }</li>
-<li>Creating Department News 
+<li>Creating Department News /news/new/department
 {
 "title":"Meeting",
 "description":"Discussion about expanding",
@@ -64,8 +64,8 @@ Replace :id with id of department</li>
 "user_id":1
 }
 </li>
-<li>Viewing general news </li>
-<li>Viewing department news </li>
+<li>Viewing general news :/news/general </li>
+<li>Viewing department news :/news/department/:id </li>
 </ul>
  
  ## Technology
@@ -77,9 +77,9 @@ Replace :id with id of department</li>
  ## BDD
   <li>Click on the link :  </li>
   <li>copy the url  and place it in the postman url bar,Navigate to the post man and select post verb, </li>
-  <li>on the body  rab select raw and  type json </li>
+  <li>on the body  tab select raw and  type json </li>
   <li>pass this data
-  {
+{
 "name":"Felix maina"
 "position":"Manager",
 "staff_role":"Editor"
